@@ -1,2 +1,2 @@
-Read ddi may thang loz
+Read me
 npx sequelize-cli migration:generate --name Dmm
