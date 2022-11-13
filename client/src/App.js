@@ -3,6 +3,7 @@ import "./App.css";
 import AdminTemplate from "./containers/admin";
 import { RouteHome, RouteAdmin } from "./router";
 import { BrowserRouter, Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 function App() {
   // const showLayoutHome = (routes) => {
@@ -18,8 +19,10 @@ function App() {
   const showLayoutAdmin = (routes) => {
     if (routes.length > 0 && routes) {
       return routes.map((item, index) => {
+        const page = <AdminTemplate element={item.element}></AdminTemplate>;
         return (
-          <AdminTemplate key={index} path={item.path} element={item.element} />
+          <Route key={index} path={item.path} element={page} />
+          // <AdminTemplate key={index} path={item.path} element={item.element} />
         );
       });
     }
