@@ -20,13 +20,13 @@ module.exports = {
         password: { type: Sequelize.STRING },
         type: { type: Sequelize.STRING },
         address: { type: Sequelize.STRING },
-        createdAt: {
-          allowNull: false,
+        created_at: {
           type: Sequelize.DATE,
+          defaultValue: Sequelize.fn("NOW"),
         },
-        updatedAt: {
-          allowNull: false,
+        updated_at: {
           type: Sequelize.DATE,
+          defaultValue: Sequelize.fn("NOW"),
         },
       }
     );

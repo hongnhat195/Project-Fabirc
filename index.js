@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 // const path = require("path");
 const { sequelize } = require("./models");
+const { createUser } = require("./controller/user.controller");
+
 // import rootRouter from "./routers";
 if (process.env.NODE_ENV !== "production") {
   dotenv.config();
@@ -20,6 +22,6 @@ app.listen(process.env.PORT || 5001, async () => {
     await sequelize.authenticate();
     console.log("Connection database successfully");
   } catch (error) {
-    console.log("Unable to connect to database");
+    console.log("Unable to connect to database: ", error);
   }
 });
