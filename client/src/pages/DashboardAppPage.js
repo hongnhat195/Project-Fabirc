@@ -16,7 +16,7 @@ import {
   AppWidgetSummary,
   AppCurrentSubject,
   AppConversionRates,
-} from '../containers/admin/dashboard/app';
+} from '../sections/@dashboard/app';
 
 // ----------------------------------------------------------------------
 
