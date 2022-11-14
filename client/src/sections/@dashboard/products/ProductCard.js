@@ -25,14 +25,14 @@ ShopProductCard.propTypes = {
 };
 
 export default function ShopProductCard({ product }) {
-  const { name, cover, price, colors, status, priceSale } = product;
+  const { id, name, cover, price, colors, status, priceSale } = product;
 
   return (
     <Card>
       <Box sx={{ pt: '100%', position: 'relative' }}>
         {status && (
           <Label
-            variant="filled"
+            variant='filled'
             color={(status === 'sale' && 'error') || 'info'}
             sx={{
               zIndex: 9,
@@ -49,18 +49,22 @@ export default function ShopProductCard({ product }) {
       </Box>
 
       <Stack spacing={2} sx={{ p: 3 }}>
-        <Link color="inherit" underline="hover">
-          <Typography variant="subtitle2" noWrap>
+        <Link href={`fabrics/${id}`} color='inherit' underline='hover'>
+          <Typography variant='subtitle2' noWrap>
             {name}
           </Typography>
         </Link>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Stack
+          direction='row'
+          alignItems='center'
+          justifyContent='space-between'
+        >
           <ColorPreview colors={colors} />
-          <Typography variant="subtitle1">
+          <Typography variant='subtitle1'>
             <Typography
-              component="span"
-              variant="body1"
+              component='span'
+              variant='body1'
               sx={{
                 color: 'text.disabled',
                 textDecoration: 'line-through',
