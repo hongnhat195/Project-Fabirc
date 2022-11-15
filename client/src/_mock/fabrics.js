@@ -40,6 +40,26 @@ const PRODUCT_COLOR = [
   '#FFC107',
 ];
 
+const PRODUCT_MATERIAL = [
+  'silk',
+  'cotton',
+  'polyeste',
+  'leather'
+]
+
+const FABRIC_NAME = [
+  'Angora',
+  'Satin',
+  'Baft',
+  'Baldachin',
+  'Batiste',
+  'Brocade',
+  'Corduroy',
+  'Chintz',
+  'Chenille',
+  'Crepe',
+  'Crinoline',
+]
 // ----------------------------------------------------------------------
 
 const fabrics = [...Array(24)].map((_, index) => {
@@ -62,6 +82,13 @@ const fabrics = [...Array(24)].map((_, index) => {
       (setIndex === 23 && PRODUCT_COLOR.slice(4, 6)) ||
       (setIndex === 24 && PRODUCT_COLOR.slice(5, 6)) ||
       PRODUCT_COLOR,
+    fabricName: sample(FABRIC_NAME),
+    color: sample(PRODUCT_COLOR),
+    material: sample(PRODUCT_MATERIAL),
+    quantity: Math.floor(Math.random() * 100) + 1,
+    customerName: faker.name.fullName(),
+    orderDate: faker.date.between('2022-01-01', '2022-10-01').toDateString(),
+    verification: sample(['Yes', 'No']),
     status: sample(['sale', 'new', '', '']),
   };
 });
