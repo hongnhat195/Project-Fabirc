@@ -10,6 +10,7 @@ import Page404 from './pages/Page404';
 import ProductsPage from './pages/ProductsPage';
 import HomePage from './pages/HomePage';
 import DashboardAppPage from './pages/DashboardAppPage';
+import DetailFabric from './pages/DetailFabric';
 
 // ----------------------------------------------------------------------
 
@@ -30,11 +31,15 @@ export default function Router() {
       path: 'login',
       element: <LoginPage />,
     },
-
     {
       path: '',
       element: <DashboardLayout />,
       children: [{ path: '', element: <HomePage /> }],
+    },
+    {
+      path: 'fabric',
+      element: <DashboardLayout />,
+      children: [{ path: '', element: <DetailFabric /> }],
     },
     {
       path: '*',
