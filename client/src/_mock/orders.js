@@ -1,0 +1,58 @@
+const orders = [
+  {
+    id: 1,
+    order_code: 'OD0001',
+    type: 'order',
+    customer: 'Tran Kha',
+    date: '20/10/2022',
+    status: 'New',
+    amount: '1000000',
+  },
+  {
+    id: 2,
+    order_code: 'OD0002',
+    type: 'return',
+    customer: 'Ronaldo',
+    date: '21/10/2022',
+    status: 'New',
+    amount: '4400000',
+  },
+  {
+    id: 3,
+    order_code: 'OD0002',
+    type: 'order',
+    customer: 'Nunez',
+    date: '20/10/2022',
+    status: 'New',
+    amount: '2000000',
+  },
+  {
+    id: 4,
+    order_code: 'OD0003',
+    type: 'order',
+    customer: 'Tran Kha',
+    date: '20/10/2022',
+    status: 'New',
+    amount: '1000000',
+  },
+  {
+    id: 5,
+    order_code: 'OD0005',
+    type: 'order',
+    customer: 'Tran Kha',
+    date: '20/10/2022',
+    status: 'New',
+    amount: '1000000',
+  },
+  {
+    id: 6,
+    order_code: 'OD0006',
+    type: 'order',
+    customer: 'Tran Kha',
+    date: '20/10/2022',
+    status: 'New',
+    amount: '1000000',
+  },
+];
+
+export default orders;

@@ -5,6 +5,7 @@ module.exports = {
     database: process.env.DEV_DB_DATABASE,
     host: process.env.DEV_DB_HOST,
     dialect: process.env.DEV_DB_DIALECT,
+    timestamp: true,
   },
   test: {
     username: "root",
