@@ -1,12 +1,9 @@
-import PropTypes from 'prop-types';
-// @mui
+import React, { useEffect, useState } from 'react';
+
+import FABRICS from '../_mock/fabrics';
 import { Box, Card, Link, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
-// utils
-import { fCurrency } from '../../../utils/formatNumber';
-// components
-import Label from '../../../components/label';
-import { ColorPreview } from '../../../components/color-utils';
+import Label from '../components/label';
 
 // ----------------------------------------------------------------------
 
@@ -18,18 +15,15 @@ const StyledProductImg = styled('img')({
   position: 'absolute',
 });
 
-// ----------------------------------------------------------------------
+const DetailFabric = (props) => {
+  const product = FABRICS[1];
+  console.log(product);
 
-ShopProductCard.propTypes = {
-  product: PropTypes.object,
-};
-
-export default function ShopProductCard({ product }) {
   const { id, name, cover, price, colors, status, priceSale } = product;
 
   return (
     <Card>
-      <Box sx={{ pt: '100%', position: 'relative' }}>
+      <Box sx={{ pt: '50%', position: 'relative' }}>
         {status && (
           <Label
             variant='filled'
@@ -60,7 +54,6 @@ export default function ShopProductCard({ product }) {
           alignItems='center'
           justifyContent='space-between'
         >
-          <ColorPreview colors={colors} />
           <Typography variant='subtitle1'>
             <Typography
               component='span'
@@ -70,13 +63,15 @@ export default function ShopProductCard({ product }) {
                 textDecoration: 'line-through',
               }}
             >
-              {priceSale && fCurrency(priceSale)}
+              {priceSale}
             </Typography>
             &nbsp;
-            {fCurrency(price)}
+            {price}
           </Typography>
         </Stack>
       </Stack>
     </Card>
   );
-}
+};
+
+export default DetailFabric;

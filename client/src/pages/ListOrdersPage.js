@@ -1,54 +1,3 @@
-// import { Helmet } from 'react-helmet-async';
-// import { useState } from 'react';
-// // @mui
-// import { Container, Stack, Typography } from '@mui/material';
-// // components
-// import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
-// // mock
-// import PRODUCTS from '../_mock/products';
-
-// // ----------------------------------------------------------------------
-
-// export default function ProductsPage() {
-//   const [openFilter, setOpenFilter] = useState(false);
-
-//   const handleOpenFilter = () => {
-//     setOpenFilter(true);
-//   };
-
-//   const handleCloseFilter = () => {
-//     setOpenFilter(false);
-//   };
-
-//   return (
-//     <>
-//       <Helmet>
-//         <title> Dashboard: Products | Minimal UI </title>
-//       </Helmet>
-
-//       <Container>
-//         <Typography variant="h4" sx={{ mb: 5 }}>
-//           Products
-//         </Typography>
-
-//         <Stack direction="row" flexWrap="wrap-reverse" alignItems="center" justifyContent="flex-end" sx={{ mb: 5 }}>
-//           <Stack direction="row" spacing={1} flexShrink={0} sx={{ my: 1 }}>
-//             <ProductFilterSidebar
-//               openFilter={openFilter}
-//               onOpenFilter={handleOpenFilter}
-//               onCloseFilter={handleCloseFilter}
-//             />
-//             <ProductSort />
-//           </Stack>
-//         </Stack>
-
-//         <ProductList products={PRODUCTS} />
-//         <ProductCartWidget />
-//       </Container>
-//     </>
-//   );
-// }
-
 import { Helmet } from 'react-helmet-async';
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
@@ -78,21 +27,20 @@ import Label from '../components/label';
 import Iconify from '../components/iconify';
 import Scrollbar from '../components/scrollbar';
 // sections
-import { UserListHead, UserListToolbar } from '../sections/@dashboard/user';
+import { OrderListHead, OrderListToolbar } from '../sections/@dashboard/order';
 // mock
-import USERLIST from '../_mock/user';
-import FABRICLIST from '../_mock/fabrics';
+import ORDERLIST from '../_mock/orders';
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'fabric_name', label: 'Fabric Name', alignRight: false },
-  { id: 'material', label: 'Material', alignRight: false },
-  { id: 'color', label: 'Color', alignRight: false },
-  { id: 'quantity', label: 'Quantity', alignRight: false },
-  { id: 'customer_id', label: 'Customer', alignRight: false },
+  { id: 'order_code', label: 'Order Code', alignRight: false },
+  { id: 'type', label: 'Type', alignRight: false },
+  { id: 'amount', label: 'Amount (VND)', alignRight: false },
+  { id: 'customer', label: 'Customer', alignRight: false },
   { id: 'date', label: 'Date', alignRight: false },
-  { id: 'verified', label: 'Verified', alignRight: false },
+  { id: 'status', label: 'Status', alignRight: false },
+
   { id: '' },
 ];
 
@@ -130,7 +78,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function UserPage() {
+export default function ListOrdersPage() {
   const [open, setOpen] = useState(null);
 
   const [page, setPage] = useState(0);
@@ -161,7 +109,7 @@ export default function UserPage() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = FABRICLIST.map((n) => n.id);
+      const newSelecteds = ORDERLIST.map((n) => n.id);
       setSelected(newSelecteds);
       return;
     }
@@ -201,10 +149,10 @@ export default function UserPage() {
   };
 
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - FABRICLIST.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - ORDERLIST.length) : 0;
 
   const filteredUsers = applySortFilter(
-    FABRICLIST,
+    ORDERLIST,
     getComparator(order, orderBy),
     filterName
   );
@@ -214,7 +162,7 @@ export default function UserPage() {
   return (
     <>
       <Helmet>
-        <title> Product Management </title>
+        <title> Orders Management </title>
       </Helmet>
 
       <Container>
@@ -225,18 +173,12 @@ export default function UserPage() {
           mb={5}
         >
           <Typography variant='h4' gutterBottom>
-            Product
+            Orders Management
           </Typography>
-          <Button
-            variant='contained'
-            startIcon={<Iconify icon='eva:plus-fill' />}
-          >
-            New Product
-          </Button>
         </Stack>
 
         <Card>
-          <UserListToolbar
+          <OrderListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -245,11 +187,11 @@ export default function UserPage() {
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
-                <UserListHead
+                <OrderListHead
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={FABRICLIST.length}
+                  rowCount={ORDERLIST.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
@@ -260,16 +202,12 @@ export default function UserPage() {
                     .map((row) => {
                       const {
                         id,
-                        fabricName,
-                        color,
-                        material,
-                        quantity,
-                        customerName,
-                        orderDate,
-                        verification,
+                        order_code,
+                        type,
+                        amount,
+                        customer,
+                        date,
                         status,
-                        avatarUrl,
-                        isVerified,
                       } = row;
                       const selectedUser = selected.indexOf(id) !== -1;
 
@@ -288,19 +226,16 @@ export default function UserPage() {
                             />
                           </TableCell>
 
-                          <TableCell align='left'>{fabricName}</TableCell>
+                          <TableCell align='left'>{order_code}</TableCell>
 
-                          <TableCell align='left'>{material}</TableCell>
+                          <TableCell align='left'>{type}</TableCell>
 
-                          <TableCell align='left'>{color}</TableCell>
+                          <TableCell align='left'>{amount}</TableCell>
 
-                          <TableCell align='left'>{quantity}</TableCell>
+                          <TableCell align='left'>{customer}</TableCell>
 
-                          <TableCell align='left'>{customerName}</TableCell>
-
-                          <TableCell align='left'>{orderDate}</TableCell>
-
-                          <TableCell align='left'>{verification}</TableCell>
+                          <TableCell align='left'>{date}</TableCell>
+                          <TableCell align='left'>{status}</TableCell>
 
                           <TableCell align='right'>
                             <IconButton
@@ -352,7 +287,7 @@ export default function UserPage() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component='div'
-            count={FABRICLIST.length}
+            count={ORDERLIST.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
